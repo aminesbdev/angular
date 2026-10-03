@@ -479,7 +479,7 @@ class HtmlAstToIvyAst implements html.Visitor {
 
     if (index === -1) {
       throw new Error(
-        'Visitor invoked incorrectly. Expecting visitBlock to be invoked siblings array as its context',
+        'Visitor invoked incorrectly. Expecting visitBlock to be invoked with the siblings array as its context',
       );
     }
 
@@ -1249,7 +1249,7 @@ class NonBindableVisitor implements html.Visitor {
   visitBlock(block: html.Block, context: any) {
     const nodes = [
       // In an ngNonBindable context we treat the opening/closing tags of block as plain text.
-      // This is the as if the `tokenizeBlocks` option was disabled.
+      // This is the same as if the `tokenizeBlocks` option was disabled.
       new t.Text(block.startSourceSpan.toString(), block.startSourceSpan),
       ...html.visitAll(this, block.children),
     ];

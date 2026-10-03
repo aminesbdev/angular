@@ -257,8 +257,8 @@ export class RepeaterContext<T> {
  * A built-in trackBy function used for situations where users specified collection index as a
  * tracking expression. Having this function body in the runtime avoids unnecessary code generation.
  *
- * @param index
- * @returns
+ * @param index Index of the item in the collection.
+ * @returns The index, used as the tracking key.
  */
 export function ɵɵrepeaterTrackByIndex(index: number) {
   return index;
@@ -269,8 +269,9 @@ export function ɵɵrepeaterTrackByIndex(index: number) {
  * as a tracking expression. Having this function body in the runtime avoids unnecessary code
  * generation.
  *
- * @param index
- * @returns
+ * @param _ Index of the item in the collection (unused).
+ * @param value The item in the collection.
+ * @returns The item itself, used as the tracking key.
  */
 export function ɵɵrepeaterTrackByIdentity<T>(_: number, value: T) {
   return value;
@@ -544,7 +545,7 @@ export function ɵɵrepeater(collection: Iterable<unknown> | undefined | null): 
       console.warn(message);
     }
 
-    // moves in the container might caused context's index to get out of order, re-adjust if needed
+    // moves in the container might cause context's index to get out of order, re-adjust if needed
     liveCollection.updateIndexes();
 
     // handle empty blocks

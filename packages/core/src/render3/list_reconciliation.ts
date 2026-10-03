@@ -31,7 +31,7 @@ export abstract class LiveCollection<T, V> {
   }
 
   // operations below could be implemented on top of the operations defined so far, but having
-  // them explicitly allow clear expression of intent and potentially more performant
+  // them explicitly allows clear expression of intent and potentially more performant
   // implementations
   swap(index1: number, index2: number): void {
     const startIdx = Math.min(index1, index2);
@@ -83,26 +83,26 @@ function recordDuplicateKeys(keyToIdx: Map<unknown, Set<number>>, key: unknown, 
 }
 
 /**
- * The live collection reconciliation algorithm that perform various in-place operations, so it
+ * The live collection reconciliation algorithm that performs various in-place operations, so it
  * reflects the content of the new (incoming) collection.
  *
  * The reconciliation algorithm has 2 code paths:
- * - "fast" path that don't require any memory allocation;
+ * - "fast" path that doesn't require any memory allocation;
  * - "slow" path that requires additional memory allocation for intermediate data structures used to
  * collect additional information about the live collection.
  * It might happen that the algorithm switches between the two modes in question in a single
- * reconciliation path - generally it tries to stay on the "fast" path as much as possible.
+ * reconciliation pass - generally it tries to stay on the "fast" path as much as possible.
  *
  * The overall complexity of the algorithm is O(n + m) for speed and O(n) for memory (where n is the
  * length of the live collection and m is the length of the incoming collection). Given the problem
- * at hand the complexity / performance constraints makes it impossible to perform the absolute
- * minimum of operation to reconcile the 2 collections. The algorithm makes different tradeoffs to
+ * at hand the complexity / performance constraints make it impossible to perform the absolute
+ * minimum of operations to reconcile the 2 collections. The algorithm makes different tradeoffs to
  * stay within reasonable performance bounds and may apply sub-optimal number of operations in
  * certain situations.
  *
  * @param liveCollection the current, live collection;
  * @param newCollection the new, incoming collection;
- * @param trackByFn key generation function that determines equality between items in the life and
+ * @param trackByFn key generation function that determines equality between items in the live and
  *     incoming collection;
  * @param reactiveConsumer the reactive consumer to be used when accessing the length or iterator of
  *     the {@link newCollection}. This ensures that if the object is a proxy, reactive reads that
@@ -214,7 +214,8 @@ export function reconcile<T, V>(
         liveStartIdx++;
         liveEndIdx++;
       } else if (!liveKeysInTheFuture.has(newStartKey)) {
-        // Check if we seen a new item that doesn't exist in the old collection and must be INSERTED
+        // Check if we've seen a new item that doesn't exist in the old collection and must be
+        // INSERTED
         const newItem = liveCollection.create(liveStartIdx, newCollection[liveStartIdx]);
         liveCollection.attach(liveStartIdx, newItem);
         liveStartIdx++;

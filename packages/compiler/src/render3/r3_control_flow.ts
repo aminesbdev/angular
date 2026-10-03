@@ -35,7 +35,7 @@ const ALLOWED_FOR_LOOP_LET_VARIABLES = new Set([
 
 /**
  * Predicate function that determines if a block with
- * a specific name cam be connected to a `for` block.
+ * a specific name can be connected to a `for` block.
  */
 export function isConnectedForLoopBlock(name: string): boolean {
   return name === 'empty';
@@ -43,13 +43,13 @@ export function isConnectedForLoopBlock(name: string): boolean {
 
 /**
  * Predicate function that determines if a block with
- * a specific name cam be connected to an `if` block.
+ * a specific name can be connected to an `if` block.
  */
 export function isConnectedIfLoopBlock(name: string): boolean {
   return name === 'else' || name === 'else if';
 }
 
-/** Creates an `if` loop block from an HTML AST node. */
+/** Creates an `if` block from an HTML AST node. */
 export function createIfBlock(
   ast: html.Block,
   connectedBlocks: html.Block[],

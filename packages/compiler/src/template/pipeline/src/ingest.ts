@@ -1187,13 +1187,13 @@ function ingestForBlock(unit: ViewCompilationUnit, forBlock: t.ForLoopBlock): vo
   };
 
   if (forBlock.i18n !== undefined && !(forBlock.i18n instanceof i18n.BlockPlaceholder)) {
-    throw Error('AssertionError: Unhandled i18n metadata type or @for');
+    throw Error('AssertionError: Unhandled i18n metadata type for @for');
   }
   if (
     forBlock.empty?.i18n !== undefined &&
     !(forBlock.empty.i18n instanceof i18n.BlockPlaceholder)
   ) {
-    throw Error('AssertionError: Unhandled i18n metadata type or @empty');
+    throw Error('AssertionError: Unhandled i18n metadata type for @empty');
   }
   const i18nPlaceholder = forBlock.i18n;
   const emptyI18nPlaceholder = forBlock.empty?.i18n;

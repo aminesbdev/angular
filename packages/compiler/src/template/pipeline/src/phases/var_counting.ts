@@ -67,7 +67,7 @@ export function countVariables(job: CompilationJob): void {
       }
     };
 
-    // Note: we iterate over `create` and `update` separately, instead of going using `unit.ops()`,
+    // Note: we iterate over `create` and `update` separately, instead of using `unit.ops()`,
     // because `unit.ops()` will visit nested ops too (e.g. the `ListenerOp.handlerOps`). We
     // don't want that, because the `visitExpressionsInOp` call below will visit the same nested
     // ops again, leading to vars in some expressions to be counted twice.
